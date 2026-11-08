@@ -1,0 +1,38 @@
+************************************************************************
+* auCdl Netlist:
+* 
+* Library Name:  45_design
+* Top Cell Name: inv
+* View Name:     schematic
+* Netlisted on:  Aug 27 10:59:41 2026
+************************************************************************
+
+*.BIPOLAR
+*.RESI = 2000 
+*.RESVAL
+*.CAPVAL
+*.DIOPERI
+*.DIOAREA
+*.EQUATION
+*.SCALE METER
+*.MEGA
+.PARAM
+
+*.GLOBAL vdd!
++        gnd!
+
+*.PIN vdd!
+*+    gnd!
+
+************************************************************************
+* Library Name: 45_design
+* Cell Name:    inv
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT inv A Y
+*.PININFO A:I Y:O
+MNM0 Y A gnd! gnd! g45n1svt m=1 l=45n w=120n
+MPM0 Y A vdd! vdd! g45p1svt m=1 l=45n w=175n
+.ENDS
+

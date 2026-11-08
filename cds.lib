@@ -1,0 +1,13 @@
+DEFINE analogLib $CDSHOME/tools/dfII/etc/cdslib/artist/analogLib
+DEFINE US_8ths $CDSHOME/tools/dfII/etc/cdslib/sheets/US_8ths
+DEFINE basic $CDSHOME/tools/dfII/etc/cdslib/basic
+DEFINE gpdk045 /apps/cadence/gpdk/gpdk045_v_5_0/gpdk045
+DEFINE NCSU_Digital_Parts /apps/cadence/gpdk/ncsu-cdk-1.6.0.beta/lib/NCSU_Digital_Parts
+DEFINE sample_45 /apps/cadence/gpdk/sample_45
+DEFINE     cds_ff_mpt      /apps/cadence/gpdk/cds_ff_mpt_v_0.5/cds_ff_mpt
+DEFINE     wsp_cds_ff_mpt  /apps/cadence/gpdk/cds_ff_mpt_v_0.5/wsp_cds_ff_mpt
+DEFINE     cds_ff_mpt_scl  /apps/cadence/gpdk/cds_ff_mpt_v_0.5/cds_ff_mpt_scl
+
+
+
+DEFINE 45_design ./45_design

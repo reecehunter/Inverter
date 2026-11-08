@@ -1,0 +1,103 @@
+;====================Set to Maestro mode explorer =============================
+ocnSetXLMode("explorer")
+ocnxlProjectDir( "~/simulation" )
+ocnxlTargetCellView( "45_design" "inv_tb" "maestro" )
+ocnxlResultsLocation( "" )
+ocnxlSimResultsLocation( "" )
+ocnxlMaxJobFail( 20 )
+
+;====================== Tests setup ============================================
+
+;---------- Test "45_design_inv_tb_1" ------------- 
+ocnxlBeginTest("45_design_inv_tb_1")
+simulator( 'spectre )
+design( "45_design" "inv_tb" "schematic")
+modelFile( 
+    '("/apps/cadence/gpdk/gpdk045_v_5_0/gpdk045/../models/spectre/gpdk045.scs" "mc")
+)
+analysis('dc ?dev "/V0"  ?param "dc"  ?start "0"  
+		?stop "1"  ?step "0.001"  )
+desVar(	  "wn" 120n	)
+desVar(	  "wp" 175n	)
+envOption(
+	'analysisOrder  list("pz" "dcmatch" "stb" "tran" "envlp" "ac" "dc" "lf" "noise" "xf" "sp" "pss" "pac" "pstb" "pnoise" "pxf" "psp" "qpss" "qpac" "qpnoise" "qpxf" "qpsp" "hb" "hbac" "hbstb" "hbnoise" "hbxf" "sens" "acmatch" "ofa") 
+)
+option(	'pzSeverity  "None" 
+	'noiseSeverity  "None" 
+	'spSeverity  "None" 
+	'acSeverity  "None" 
+	'dcOpSeverity  "None" 
+	'dcSeverity  "None" 
+	'tranSeverity  "None" 
+	'checklimitdest  "sqldb" 
+)
+saveOption( ?infoOptions list(list("modelParameter" "models" "rawfile" "" "" "" t) list("element" "inst" "rawfile" "" "" "" t) list("outputParameter" "output" "rawfile" "" "" "" t) list("designParamVals" "parameters" "rawfile" "" "" "" t) list("primitives" "primitives" "rawfile" "" "" "" t) list("subckts" "subckts" "rawfile" "" "" "" t) list("asserts" "assert" "rawfile" "" "" "" nil) list("extremeinfo" "all" "logfile" "" "yes" "" nil) list("allcap" "allcap" "file" "" "" "" nil) list("simStatistics" "simstat" "rawfile" "" "" "" nil) list("<Click_To_Add>" "none" "rawfile" "" "" "" nil) ) )
+temp( 27 ) 
+ocnxlOutputSignal( "/A" ?plot t)
+ocnxlOutputSignal( "/Y" ?plot t)
+ocnxlEndTest() ; "45_design_inv_tb_1"
+
+;====================== Sweeps setup ===========================================
+
+;====================== Model Group setup ==========================================
+
+;====================== Corners setup ==========================================
+
+;====================== Checks and Asserts setup ============================================
+ocnxlPutChecksAsserts(?netlist nil)
+
+;====================== Job setup ==============================================
+ocnxlJobSetup( '(
+	"blockemail" "1"
+	"cloudEnvFile" ""
+	"cloudImageFile" ""
+	"cloudPathBindings" ""
+	"cloudSSHHost" ""
+	"cloudStorePath" ""
+	"cloudUploadCmd" ""
+	"communicationtimeout" "180"
+	"configuretimeout" "300"
+	"defaultcpuvalue" "1"
+	"defaultmemoryvalue" "1000"
+	"distributionmethod" "Local"
+	"jobruntype" "LSCS"
+	"estimatecpuvalue" ""
+	"estimatememoryvalue" ""
+	"estimationsimulationmode" "0"
+	"lingertimeout" "300"
+	"maxjobs" "1"
+	"name" "Maestro Default"
+	"preemptivestart" "1"
+	"providecpuandmemorydata" "1"
+	"reconfigureimmediately" "1"
+	"remotevirtuosohome" ""
+	"runpointsvalue" "5"
+	"runtimeout" "-1"
+	"scaleestimatedbycpu" "100"
+	"scaleestimatedbymemory" "100"
+	"scalehistorybycpu" "100"
+	"scalehistorybymemory" "100"
+	"showerrorwhenretrying" "1"
+	"showoutputlogerror" "0"
+	"startmaxjobsimmed" "1"
+	"starttimeout" "300"
+	"userquotaspace" "0"
+	"userquotavalue" ""
+	"usesameprocess" "1"
+	"warndisklow" "0"
+	"warnthresholdvalue" "100"
+) )
+
+;====================== Disabled items =========================================
+
+;====================== Run Mode Options ======================================
+
+;====================== Starting Point Info ======================================
+
+;====================== Run command ============================================
+ocnxlRun( ?mode 'sweepsAndCorners ?nominalCornerEnabled t ?allCornersEnabled t ?allSweepsEnabled t)
+ocnxlOutputSummary(?exprSummary t ?specSummary t ?detailed t ?wave t)
+ocnxlOpenResults()
+
+;====================== End XL Mode command ===================================
+ocnxlEndXLMode("explorer")

@@ -1,0 +1,35 @@
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+* CDL Netlist:                                              *
+*                                                           *
+* Cell Name  : inv                                          *
+* Netlisted  : Thu Aug 27 10:59:50 2026                     *
+* Pegasus Version: 23.14-s006 Thu Jan 25 18:41:38 PST 2024  *
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+*.LDD
+*.DEVTMPLT 0 MN(g45n1svt) _nmos1v ndiff_conn(D) poly_conn(G) ndiff_conn(S) psubstrate(B)
+*.DEVTMPLT 1 MP(g45p1svt) _pmos1v pdiff_conn(D) poly_conn(G) pdiff_conn(S) nwell_conn(B)
+
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+* Sub cell: pmos1v_3_CDNS_787853579970                      *
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+.subckt pmos1v_3_CDNS_787853579970 B_topTap D_drain_1 S_source_0 4
+** N=5 EP=4 FDC=1
+M0 D_drain_1 4 S_source_0 B_topTap g45p1svt L=4.5e-08 W=1.75e-07 AD=2.45e-14 AS=2.45e-14 PD=6.3e-07 PS=6.3e-07 fw=1.75e-07 sa=1.4e-07 sb=1.4e-07 sca=117.739 scb=0.0868978 scc=0.0141604 $X=0 $Y=0 $dt=1
+.ends pmos1v_3_CDNS_787853579970
+
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+* Sub cell: nmos1v_3_CDNS_787853579971                      *
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+.subckt nmos1v_3_CDNS_787853579971 G S_source_0 D_drain_1 B_botTap
+** N=4 EP=4 FDC=1
+M0 D_drain_1 G S_source_0 B_botTap g45n1svt L=4.5e-08 W=1.2e-07 AD=1.68e-14 AS=1.68e-14 PD=5.2e-07 PS=5.2e-07 fw=1.2e-07 sa=1.4e-07 sb=1.4e-07 sca=12.9282 scb=0.0134361 scc=0.000622896 $X=0 $Y=0 $dt=0
+.ends nmos1v_3_CDNS_787853579971
+
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+* Sub cell: inv                                             *
+* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
+.subckt inv A Y gnd! vdd!
+** N=4 EP=4 FDC=2
+X0 vdd! Y vdd! A pmos1v_3_CDNS_787853579970 $T=1060 1440 0 0 $X=640 $Y=1240
+X1 A gnd! Y gnd! nmos1v_3_CDNS_787853579971 $T=1060 560 0 0 $X=640 $Y=0
+.ends inv
